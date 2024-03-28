@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Prompt Ingester</title>
+    <style>
+        /* CSS for CACI header */
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* CSS for main content */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* CSS for input and output */
+        #prompt {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #response {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            min-height: 100px;
+        }
+
+        /* CSS for button */
+        #submit-btn {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- CACI Header -->
+    <div class="header">
+        <h1>CACI</h1>
+        <p>ChatGPT Prompt Ingester</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <label for="prompt">Enter your prompt:</label><br>
+        <textarea id="prompt" rows="4"></textarea><br>
+        <button id="submit-btn">Submit</button><br>
+        <div id="response"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to handle API call and display response
+        document.getElementById('submit-btn').addEventListener('click', async function() {
+            const prompt = document.getElementById('prompt').value;
+            const responseElement = document.getElementById('response');
+            
+            // Call ChatGPT API
+            const response = await fetch('YOUR_API_ENDPOINT', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt: prompt })
+            });
+
+            // Parse and display response
+            const data = await response.json();
+            responseElement.innerHTML = `<p>Response:</p><p>${data.response}</p>`;
+        });
+    </script>
+</body>
+</html>
